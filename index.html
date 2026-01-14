@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working With Joanna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000;
+            --dark: #171717;
+            --grey: #525252;
+            --grey-light: #a3a3a3;
+            --border: #e5e5e5;
+            --bg: #fafafa;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            line-height: 1.6;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+        }
+        
+        /* Header */
+        header {
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            color: var(--black);
+            margin-bottom: 8px;
+            line-height: 1.1;
+        }
+        
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        header .subtitle {
+            font-size: 1rem;
+            color: var(--grey);
+            font-weight: 400;
+        }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 48px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--grey);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            margin-bottom: -1px;
+        }
+        
+        .tab-btn:hover {
+            color: var(--dark);
+        }
+        
+        .tab-btn.active {
+            color: var(--black);
+            border-bottom-color: var(--black);
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Sections */
+        section {
+            margin-bottom: 64px;
+        }
+        
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--grey-light);
+            margin-bottom: 12px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+        
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 48px 0 20px 0;
+            color: var(--black);
+        }
+        
+        h3:first-child {
+            margin-top: 0;
+        }
+        
+        p {
+            margin-bottom: 16px;
+            color: var(--grey);
+        }
+        
+        /* Intro card */
+        .intro-card {
+            background: var(--black);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+        }
+        
+        .intro-card p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .intro-card p + p {
+            margin-top: 16px;
+        }
+        
+        /* Key points */
+        .key-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .key-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .key-card {
+            background: var(--white);
+            padding: 24px;
+        }
+        
+        .key-card .label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--grey-light);
+            margin-bottom: 8px;
+        }
+        
+        .key-card .content {
+            color: var(--dark);
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+        
+        /* Build cards */
+        .build-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 16px;
+            transition: all 0.15s ease;
+        }
+        
+        .build-card:hover {
+            border-color: var(--black);
+        }
+        
+        .build-card .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 16px;
+        }
+        
+        .build-card .title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--black);
+        }
+        
+        .build-card .tag {
+            font-size: 0.6875rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--grey-light);
+            background: var(--bg);
+            padding: 6px 12px;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+        
+        .build-card .description {
+            color: var(--grey);
+            font-size: 0.9375rem;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        .build-card .outcome {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .build-card .outcome::before {
+            content: "→ ";
+            color: var(--grey-light);
+        }
+        
+        /* Lists */
+        ul {
+            margin: 16px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            color: var(--grey);
+        }
+        
+        li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 4px;
+            height: 4px;
+            background: var(--black);
+            border-radius: 50%;
+        }
+        
+        /* Do/Don't */
+        .do-dont-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .do-dont-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .do-card, .dont-card {
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .do-card {
+            background: var(--white);
+        }
+        
+        .dont-card {
+            background: var(--bg);
+        }
+        
+        .do-card .card-header, .dont-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--black);
+        }
+        
+        .do-card li::before, .dont-card li::before {
+            background: var(--black);
+        }
+        
+        .do-card li, .dont-card li {
+            font-size: 0.9375rem;
+        }
+        
+        /* Quote cards */
+        .quote-card {
+            border-left: 2px solid var(--black);
+            padding: 0 0 0 24px;
+            margin: 24px 0;
+        }
+        
+        .quote-card blockquote {
+            font-size: 1rem;
+            color: var(--dark);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .quote-card .source {
+            font-size: 0.875rem;
+            color: var(--grey-light);
+        }
+        
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .metric-card {
+            background: var(--white);
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .metric-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+        }
+        
+        .metric-card .mlabel {
+            font-size: 0.75rem;
+            color: var(--grey-light);
+            line-height: 1.4;
+        }
+        
+        /* Reference table */
+        .ref-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.9375rem;
+        }
+        
+        .ref-table th {
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.6875rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--grey-light);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .ref-table td {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--grey);
+        }
+        
+        .ref-table td:first-child {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        /* Practical grid */
+        .practical-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+        }
+        
+        @media (max-width: 700px) {
+            .practical-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .practical-card {
+            background: var(--white);
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .practical-card .icon {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+        
+        .practical-card .label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--grey-light);
+            margin-bottom: 6px;
+        }
+        
+        .practical-card .value {
+            font-size: 0.9375rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        /* Stuck section */
+        .stuck-card {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+        
+        .stuck-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--black);
+        }
+        
+        .stuck-card .positive {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-style: italic;
+            color: var(--grey);
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+        
+        .footer-contact {
+            color: var(--grey);
+            font-size: 0.9375rem;
+            margin-bottom: 4px;
+        }
+        
+        .footer-contact a {
+            color: var(--dark);
+            text-decoration: none;
+        }
+        
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-updated {
+            font-size: 0.8125rem;
+            color: var(--grey-light);
+            margin-top: 16px;
+        }
+        
+        /* Interests grid */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        @media (max-width: 600px) {
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .interest-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .interest-icon {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+        
+        .interest-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+        
+        .interest-detail {
+            font-size: 0.9375rem;
+            color: var(--grey);
+            line-height: 1.5;
+        }
+        
+        /* Book grid */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        
+        @media (max-width: 600px) {
+            .book-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .book-item {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .book-title {
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 4px;
+            font-size: 0.9375rem;
+        }
+        
+        .book-author {
+            font-size: 0.8125rem;
+            color: var(--grey-light);
+        }
+        
+        /* Essay list */
+        .essay-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .essay-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        
+        .essay-status {
+            font-size: 0.625rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+        
+        .essay-status.draft {
+            background: var(--black);
+            color: var(--white);
+        }
+        
+        .essay-status.idea {
+            background: var(--bg);
+            color: var(--grey);
+            border: 1px solid var(--border);
+        }
+        
+        .essay-title {
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        /* Print */
+        @media print {
+            .tab-nav {
+                display: none;
+            }
+            .tab-content {
+                display: block !important;
+                page-break-before: always;
+            }
+            .tab-content:first-of-type {
+                page-break-before: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <h1>Working With Joanna</h1>
+            <p class="subtitle">How to work with me</p>
+        </header>
+        
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="profile">Profile</button>
+            <button class="tab-btn" data-tab="stories">Stories</button>
+            <button class="tab-btn" data-tab="feedback">Feedback</button>
+            <button class="tab-btn" data-tab="references">References</button>
+        </nav>
+
+        <!-- ==================== PROFILE TAB ==================== -->
+        <div id="profile" class="tab-content active">
+            
+            <div class="intro-card">
+                <p>I'm good at understanding people through empathy; what they're actually asking for, what's really frustrating them, what they need but haven't said. I like building things from scratch: figuring out what should exist and then making it happen. I like to work on things that are meaningful and are genuinely helpful to people and I don't need status to do that.</p>
+                <p>I like to design systems that solve problems without creating new ones. Systems people enjoy using, that breathe and adapt rather than constrain. I get frustrated when things aren't sustainable: they need to grow without constant manual input. This is what excites me about AI. We can remove the menial tasks that drain people's time and attention, tasks not worthy of their abilities, and let systems stay fresh instead of going stale.</p>
+                <p>I love working with startups. There's an energy to founders building something new, and I like being close to that: understanding what they need, solving real problems with them, helping them move forward. I need problems that matter, that have a genuine effect on people.</p>
+                <p>I think about the big picture: incentives, behaviour, why people do what they do. Stories help me with this, books and films. I love being in motion, working with others, learning from them. I want to understand how people actually work, then design something that fits and gently guides them toward better outcomes.</p>
+            </div>
+            
+            <div class="key-grid">
+                <div class="key-card">
+                    <div class="label">Best At</div>
+                    <div class="content">Empathy. Building things from scratch. Understanding what people actually need. Designing systems that work without making things harder. Staying close to the real work and bringing others along with me.</div>
+                </div>
+                <div class="key-card">
+                    <div class="label">Self-Aware About</div>
+                    <div class="content">I lose momentum when the work doesn't have clear purpose, or when I don't have autonomy.</div>
+                </div>
+                <div class="key-card">
+                    <div class="label">Need From You</div>
+                    <div class="content">Clear goals. Honest feedback. Room to figure things out. Something to think about.</div>
+                </div>
+                <div class="key-card">
+                    <div class="label">You'll Get</div>
+                    <div class="content">Ownership. Systems people actually want to use. Someone who brings the team along and helps them be brave.</div>
+                </div>
+            </div>
+            
+            <section>
+                <div class="section-label">Collaboration</div>
+                <h2>Getting My Best Work</h2>
+                
+                <p>Some practical things about how to get good work from me.</p>
+                
+                <div class="do-dont-grid">
+                    <div class="do-card">
+                        <div class="card-header">
+                            <span>✓</span> This works
+                        </div>
+                        <ul>
+                            <li>Startups and founders. Direct customer contact.</li>
+                            <li>Problems that require real thought</li>
+                            <li>Clear goals, even if the path isn't</li>
+                            <li>Autonomy once we're aligned</li>
+                            <li>Access to users</li>
+                            <li>Designing systems from scratch</li>
+                            <li>Feedback that's specific and actionable</li>
+                            <li>Managers who invest in their people</li>
+                        </ul>
+                    </div>
+                    <div class="dont-card">
+                        <div class="card-header">
+                            <span>✗</span> This doesn't
+                        </div>
+                        <ul>
+                            <li>Being far from users</li>
+                            <li>Back-to-back meetings with no time to think</li>
+                            <li>Work where I can't see the impact</li>
+                            <li>Too much process for its own sake</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="stuck-card">
+                    <h4>When I'm At My Best</h4>
+                    <p>I do my best work when I feel trusted, when I can see the result of what I'm doing, and when I have room to figure out my own way there. I thrive with clear goals and real problems. I need some time to think, not just execute.</p>
+                </div>
+                
+                <h3>Communication</h3>
+                <ul>
+                    <li><strong>Thinking aloud:</strong> I process by talking things through. I need a sounding board and thrive on collaboration.</li>
+                    <li><strong>Jargon:</strong> I'm not good with it and I don't love it. It removes clarity and excludes people. I prefer plain language that everyone can understand.</li>
+                    <li><strong>Explaining complex things:</strong> I love finding ways to break things down so people can actually understand them. Pedagogy matters to me.</li>
+                </ul>
+                
+                <h3>Energy</h3>
+                <ul>
+                    <li>My best hours are mid-morning to early afternoon</li>
+                    <li>I like starting with small tasks before tackling harder ones. It helps me gain momentum and get started.</li>
+                    <li>I tend to underestimate how long things take. I try to build in slack.</li>
+                    <li>External structure really helps me stay on track</li>
+                    <li>I need to be around people to stay motivated. I love being part of a team, learning from others, and talking through problems and solutions out loud.</li>
+                    <li>But I also need focused time in a quiet corner to do real thinking and project work.</li>
+                    <li>A good mix of both is ideal. Wouldn't enjoy being fully remote.</li>
+                </ul>
+                
+                <h3>Academia</h3>
+                <ul>
+                    <li><strong>MSc Data Science & Politics</strong> — University College Dublin, 2025</li>
+                    <li><strong>BA Philosophy</strong> — Trinity College Dublin</li>
+                </ul>
+                
+                <h3>Publication</h3>
+                <ul>
+                    <li><a href="https://journals.sagepub.com/doi/10.1177/15423166251316convict" target="_blank" style="color: var(--dark);">The Role of Food in Peace Agreements</a> — Journal of Peacebuilding & Development, July 2025. Co-authored with Prof. Caitriona Dowd.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <div class="section-label">Details</div>
+                <h2>Practical</h2>
+                
+                <h3 style="margin-top: 0;">Languages</h3>
+                <ul>
+                    <li><strong>English / French:</strong> Bilingual. English mother tongue, grew up in France.</li>
+                    <li><strong>Italian:</strong> Intermediate. Can follow Spanish. Father is Italian-Chilean.</li>
+                </ul>
+                
+                <div class="practical-grid" style="margin-top: 32px;">
+                    <div class="practical-card">
+                        <div class="icon">📍</div>
+                        <div class="label">Based In</div>
+                        <div class="value">Dublin, Ireland</div>
+                    </div>
+                    <div class="practical-card">
+                        <div class="icon">🌍</div>
+                        <div class="label">Citizenship</div>
+                        <div class="value">Irish, Italian, Chilean</div>
+                    </div>
+                    <div class="practical-card">
+                        <div class="icon">✓</div>
+                        <div class="label">Work Visas</div>
+                        <div class="value">EU & UK</div>
+                    </div>
+                    <div class="practical-card">
+                        <div class="icon">✈️</div>
+                        <div class="label">Open To</div>
+                        <div class="value">Dublin, London, Paris, EU capitals, NYC, SF</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-label">Outside Work</div>
+                <h2>Interests</h2>
+                
+                <div class="interests-grid">
+                    <div class="interest-card">
+                        <div class="interest-icon">🎬</div>
+                        <div class="interest-name">Film</div>
+                        <div class="interest-detail">Renoir, Ken Loach, Truffaut, Wong Kar-wai, Campion, Pialat... Filmmaking is something I still hope to pursue, to make documentaries or short films. I love going to the cinema and can talk about it ad nauseam.</div>
+                    </div>
+                    <div class="interest-card">
+                        <div class="interest-icon">🥾</div>
+                        <div class="interest-name">Walking & Running</div>
+                        <div class="interest-detail">Just feel happier after moving and being outside. Walked 825km on the Camino del Norte in 2025. Ran the Dublin Marathon in 2023. Currently training as a hiking leader with Mountaineering Ireland.</div>
+                    </div>
+                    <div class="interest-card">
+                        <div class="interest-icon">🌍</div>
+                        <div class="interest-name">Global Politics & Philosophy</div>
+                        <div class="interest-detail">I love thinking about how power systems work, learning about international dynamics and geopolitics, and thinking about how things might be more positive in the future for most people. Protecting democracy, living well, and how we can get to a place where more humans can use their full potential and solve real world problems.</div>
+                    </div>
+                    <div class="interest-card">
+                        <div class="interest-icon">📚</div>
+                        <div class="interest-name">Stories & Psychology</div>
+                        <div class="interest-detail">I love understanding how people work, and there's no better way than through stories and fiction. I love old classics, character development, tropes, and understanding story arcs. Stories were basically the beginning of psychology and have been how people processed their own lives throughout history. I wish more ways of thinking took into account how humans really work internally, and that Silicon Valley were more interested in classical literature.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-label">Reading</div>
+                <h2>Favourite Books</h2>
+                
+                <div class="book-grid">
+                    <div class="book-item">
+                        <a href="https://en.wikipedia.org/wiki/Jane_Eyre" target="_blank" style="text-decoration: none;">
+                            <div class="book-title">Jane Eyre</div>
+                            <div class="book-author">Charlotte Brontë</div>
+                        </a>
+                    </div>
+                    <div class="book-item">
+                        <a href="https://en.wikipedia.org/wiki/The_Overstory" target="_blank" style="text-decoration: none;">
+                            <div class="book-title">The Overstory</div>
+                            <div class="book-author">Richard Powers</div>
+                        </a>
+                    </div>
+                    <div class="book-item">
+                        <a href="https://en.wikipedia.org/wiki/The_Origins_of_Totalitarianism" target="_blank" style="text-decoration: none;">
+                            <div class="book-title">The Burden of Our Time</div>
+                            <div class="book-author">Hannah Arendt</div>
+                        </a>
+                    </div>
+                    <div class="book-item">
+                        <a href="https://en.wikipedia.org/wiki/Mrs_Dalloway" target="_blank" style="text-decoration: none;">
+                            <div class="book-title">Mrs Dalloway</div>
+                            <div class="book-author">Virginia Woolf</div>
+                        </a>
+                    </div>
+                    <div class="book-item">
+                        <a href="https://en.wikipedia.org/wiki/Tracks_(book)" target="_blank" style="text-decoration: none;">
+                            <div class="book-title">Tracks</div>
+                            <div class="book-author">Robyn Davidson</div>
+                        </a>
+                    </div>
+                    <div class="book-item">
+                        <a href="https://en.wikipedia.org/wiki/Jonathan_Strange_%26_Mr_Norrell" target="_blank" style="text-decoration: none;">
+                            <div class="book-title">Jonathan Strange & Mr Norrell</div>
+                            <div class="book-author">Susanna Clarke</div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+
+        <!-- ==================== STORIES TAB ==================== -->
+        <div id="stories" class="tab-content">
+            
+            <section>
+                <div class="section-label">Background</div>
+                <h2>Experience</h2>
+                <p>I spent seven years at Stripe (joined when there were about twenty-five people in Dublin), then two years at TikTok. I also did an MSc in Data Science and my research got published.</p>
+            </section>
+            
+            <section>
+                <div class="section-label">Stripe</div>
+                <h2>Product Operations</h2>
+                <p>One of the first Product Ops hires in EMEA. Embedded in product and engineering teams to run betas, collect user feedback, and coordinate launches.</p>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Delegated Authentication Launch</div>
+                        <div class="tag">2020</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Stripe was launching Delegated Authentication to large enterprise users. Account managers were nervous because turning on authentication features could affect their biggest relationships. Different user groups needed different comms: some were technical, some business-focused, with varying levels of exposure to the product.<br><br>
+                        <strong>Task:</strong> Make sure AMs had everything they needed to confidently communicate the change, and that users had clear paths to give feedback or raise concerns.<br><br>
+                        <strong>Action:</strong> Created a comms toolkit tailored to different audiences. Mapped out user cohorts based on Sigma access, SCA traffic exposure, and beta participation so we could sequence comms appropriately. Built a tracker to manage the rollout. Built in feedback loops and opt-out paths so nervous AMs had something concrete to offer their users.<br><br>
+                        <strong>Result:</strong> Smooth launch, AMs felt supported, gathered feedback that fed into iteration. No major escalations from enterprise accounts.
+                    </div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Identity Verification GA Launch</div>
+                        <div class="tag">June 2021</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Stripe Identity was approaching General Availability. The product team needed someone to coordinate the launch and manage the Additional Verification private beta.<br><br>
+                        <strong>Task:</strong> Lead product operations for the launch and build connections between engineering and user-facing teams.<br><br>
+                        <strong>Action:</strong> Mapped out planning and put everything into Jira with actionable timelines. Built feedback loops between support, sales, account management and product/engineering. Worked closely with the eng lead on a new part of the product linking marketplace onboarding and Stripe Identity.<br><br>
+                        <strong>Result:</strong> Successful GA launch. Clear process for beta feedback to reach product decisions.
+                    </div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Payment Methods Launches</div>
+                        <div class="tag">2019–2022</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Stripe was building payment methods in EMEA (PayPal, BLIK, Klarna, SEPA debit) that needed to launch to users.<br><br>
+                        <strong>Task:</strong> Run beta programs, coordinate launches, and be the bridge between engineering and users.<br><br>
+                        <strong>Action:</strong> Embedded in product and engineering teams. Sole point of contact for beta users on strategic product launches. Triaged issues, escalated bugs to engineering with detailed repro steps, resolved blockers. Translated user feedback into product roadmap input.<br><br>
+                        <strong>Result:</strong> Multiple successful launches across EMEA markets.
+                    </div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Onboarding Risk Review (ORR)</div>
+                        <div class="tag">2019–2020</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Onboarding Risk Review was a complex process involving multiple teams and systems.<br><br>
+                        <strong>Task:</strong> Step in as Ops DRI and improve the process.<br><br>
+                        <strong>Action:</strong> Analysed ORR trends and optimised workflows. Attended bug bashes to proactively identify product issues. Did a full audit of all resolution paths available to support and risk agents. Built functional expertise in verifications, Risk Verification Policy, Account Lockout, Account Security, and Payouts.<br><br>
+                        <strong>Result:</strong> Manager noted: "Your ability to develop deep functional expertise quickly is commendable."
+                    </div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Tax Season 2019</div>
+                        <div class="tag">2019</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Tax season required coordination across multiple teams, related to verifications and onboarding information like tax numbers.<br><br>
+                        <strong>Task:</strong> Help the team get through tax season smoothly.<br><br>
+                        <strong>Action:</strong> Coordinated 15 stakeholder functions across 7 organisations and 60+ workstreams.<br><br>
+                        <strong>Result:</strong> Successfully delivered tax season support.
+                    </div>
+                </div>
+                
+            </section>
+            
+            <section>
+                <div class="section-label">Stripe</div>
+                <h2>Atlas</h2>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Atlas Tax Product</div>
+                        <div class="tag">2018</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Atlas users needed support for their first US tax season after incorporating. We were building a tax product to help them.<br><br>
+                        <strong>Task:</strong> DRI for the Atlas tax product effort.<br><br>
+                        <strong>Action:</strong> Reviewed the product closely and helped write the user documentation. Noticed an incorrect product decision and flagged it, which changed the direction of that part of the product.<br><br>
+                        <strong>Result:</strong> Successfully delivered the tax product for Atlas users.
+                    </div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Y Combinator Partnership</div>
+                        <div class="tag">2017–2020</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Patrick McKenzie was reviewing YC applications on his own as a personal side project.<br><br>
+                        <strong>Task:</strong> Turn it into something scalable that could run company-wide.<br><br>
+                        <strong>Action:</strong> Built a volunteer program from scratch. Wrote all the training materials. Recruited over 100 reviewers across the company. Built vendor workflows and quality tracking. Ran it for three years.<br><br>
+                        <strong>Result:</strong> Atlas became YC's top external referrer. Five Atlas users got directly into YC through the program.
+                    </div>
+                    <div class="outcome">Patrick McKenzie: "It is impossible to overstate how important Joanna was to this project."</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Atlas Fund</div>
+                        <div class="tag">2018</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Stripe wanted to invest in Atlas startups but had no systems to make it happen.<br><br>
+                        <strong>Task:</strong> Build the entire operational infrastructure from scratch.<br><br>
+                        <strong>Action:</strong> Created legal workflows, recruited mentors, managed founder relationships. Did all of this with no engineering support.<br><br>
+                        <strong>Result:</strong> $180k deployed across 18 companies. Six raised follow-on funding. One got into YC.
+                    </div>
+                    <div class="outcome">Atlas Fund user: "Joanna is proactively helping us from day one. Easily one of the best things about Atlas Fund."</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Vendor Training Program</div>
+                        <div class="tag">2016–2018</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> The Cork vendor team was escalating about 10% of cases back to Stripe. Quality wasn't where it needed to be.<br><br>
+                        <strong>Task:</strong> Get them operating at Stripe-level quality while being the only Atlas person in EMEA.<br><br>
+                        <strong>Action:</strong> Went to Cork multiple times, spent weeks with the team. Trained them not just on processes but how to think about users. Created a "Tier 1.5" senior role that gave people somewhere to grow into. Built tracking, documentation, feedback loops. Advocated internally for giving them more responsibility.<br><br>
+                        <strong>Result:</strong> Escalation dropped to 2–3% (described as "unprecedented"). CSAT stayed above 90%. Became the company-wide benchmark for vendor training. The Tier 1.5 role became a retention tool.
+                    </div>
+                    <div class="outcome">Chloe Wood: "She shaped the team's attitude and philosophy towards partner teams. She convinced me to treat them as serious collaborators."</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Bank Account Automation</div>
+                        <div class="tag">H2 2019</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Bank account challenge requests each required a support case, creating thousands of manual tickets per year.<br><br>
+                        <strong>Task:</strong> Find a way to reduce this volume.<br><br>
+                        <strong>Action:</strong> Partnered with Engineering to automate a portion of the requests.<br><br>
+                        <strong>Result:</strong> Prevented approximately 2,000 User Safety requests per year.
+                    </div>
+                    <div class="outcome">Manager feedback: "A huge win for Stripe and our users."</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Franklin User Research</div>
+                        <div class="tag">H2 2019</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> The Franklin team needed user insights but didn't have research infrastructure set up.<br><br>
+                        <strong>Task:</strong> Set up user interviews and gather feedback at scale.<br><br>
+                        <strong>Action:</strong> Built and sent a large-scale survey to 10,000+ users. Set up user interviews. Coordinated with User Research team to do it properly.<br><br>
+                        <strong>Result:</strong> Delivered actionable insights to the product team.
+                    </div>
+                    <div class="outcome">Kelly Moriarty: "With very little direction, she has been running this workstream, working across multiple Stripe teams, and just all around getting things done. I'm really impressed with both Joanna's work output as well as her ethics and approach."</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">User Happiness Credits</div>
+                        <div class="tag">H1 2019</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Other teams were misusing Ops happiness credits due to process ambiguity, causing a spike in usage.<br><br>
+                        <strong>Task:</strong> Understand what was happening and fix it.<br><br>
+                        <strong>Action:</strong> Dug into data to understand the spike. Created remediation plan and communicated it cross-functionally.<br><br>
+                        <strong>Result:</strong> Resolved the misuse and clarified the process.
+                    </div>
+                    <div class="outcome">Manager: "A perfect example of your project management skills."</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Elevate Interviewer</div>
+                        <div class="tag">2017–2021</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Stripe's Elevate program was a bar-raiser hiring program that needed interviewers to assess candidates for culture fit and quality.<br><br>
+                        <strong>Task:</strong> Conduct interviews for candidates across the entire company, not just my team.<br><br>
+                        <strong>Action:</strong> Ran 2–3 interviews per week for over four years. Trained the next cohort of interviewers.<br><br>
+                        <strong>Result:</strong> Trusted to evaluate culture fit and quality across all of Stripe, not just my own team.
+                    </div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Product Ops Hub</div>
+                        <div class="tag">2017–2023</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Product ops knowledge was scattered across docs, Slack, and people's heads. New team members had no central place to learn.<br><br>
+                        <strong>Task:</strong> Create a single source of truth for product ops best practices.<br><br>
+                        <strong>Action:</strong> Built a central hub for product ops knowledge. Ran the Atlas community forum and became the main point of contact for many startups.<br><br>
+                        <strong>Result:</strong> Scaled knowledge across EMEA. Built direct founder relationships.
+                    </div>
+                    <div class="outcome"><a href="https://joannapedrina.github.io/mistral-product-ops-hub-demo/" target="_blank" style="color: var(--black);">View interactive demo →</a></div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-label">TikTok</div>
+                <h2>What I Built</h2>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Cross-Product Localisation</div>
+                        <div class="tag">2023–2024</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Twenty different e-commerce products were using different English terms for the same things.<br><br>
+                        <strong>Task:</strong> Standardise the lexicon across all products.<br><br>
+                        <strong>Action:</strong> Led the localisation project, built systems for regional expansion.<br><br>
+                        <strong>Result:</strong> Created the foundation for Western market expansion.
+                    </div>
+                    <div class="outcome">Foundation for Western markets</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Market Research Framework</div>
+                        <div class="tag">2023–2024</div>
+                    </div>
+                    <div class="description">
+                        <strong>Situation:</strong> Product teams were in Beijing, twelve hours away. They needed Western user feedback but had no way to get it.<br><br>
+                        <strong>Task:</strong> Build a process that could bridge the gap.<br><br>
+                        <strong>Action:</strong> Created a framework to gather Western user feedback and turn it into something the China-based teams could actually use.<br><br>
+                        <strong>Result:</strong> Bridged the timezone and language gap between Western users and product development.
+                    </div>
+                    <div class="outcome">Bridged the timezone and language gap</div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-label">Research</div>
+                <h2>Academic Work</h2>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">The Role of Food in Peace Agreements</div>
+                        <div class="tag">Published 2025</div>
+                    </div>
+                    <div class="description">With Prof. Caitriona Dowd. We used NLP to search about two thousand peace agreements for food-related language. Food provisions are rare, only about 20% of agreements mention them. But where food insecurity exists and the agreement mentions food, peace tends to last longer.</div>
+                    <div class="outcome">Journal of Peacebuilding and Development</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Quantifying Humanitarian Discourse</div>
+                        <div class="tag">2024</div>
+                    </div>
+                    <div class="description">My MSc thesis. I analysed UN General Assembly speeches for measurement language. Despite the rise of MDGs and SDGs, that kind of language actually declined over time. This suggests measurement became institutionalised rather than something people needed to advocate for.</div>
+                    <div class="outcome">MSc Data Science and Politics, UCD</div>
+                </div>
+                
+                <div class="build-card">
+                    <div class="top-row">
+                        <div class="title">Conference Presentation</div>
+                        <div class="tag">May 2024</div>
+                    </div>
+                    <div class="description">Presented the food and peace research at the Conflict and Hunger Workshop in Dublin.</div>
+                    <div class="outcome">UCD Connected Politics Lab</div>
+                </div>
+            </section>
+            
+        </div>
+
+        <!-- ==================== FEEDBACK TAB ==================== -->
+        <div id="feedback" class="tab-content">
+            
+            <section>
+                <div class="section-label">From Others</div>
+                <h2>What People Have Said</h2>
+                
+                <p style="margin-bottom: 32px;">Collected from performance review feedback over the years at Stripe.</p>
+                
+                <h3>On Empathy and Understanding Users</h3>
+                
+                <div class="quote-card">
+                    <blockquote>"I think Joanna's superpower is empathy. She can put herself in the shoes of our users (what are they really asking?), our vendors (what tools and information do they need to do their job?), and her teammates (how can I best help them?)"</blockquote>
+                    <div class="source">— Taylor Francis (current CEO of Watershed), Stripe Atlas Lead</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"Joanna is proactively helping us from day one. Easily one of the best things about Atlas Fund."</blockquote>
+                    <div class="source">— Atlas Fund participant</div>
+                </div>
+                
+                <h3>On Ownership and Independence</h3>
+                
+                <div class="quote-card">
+                    <blockquote>"Joanna's effectiveness comes from her deep sense of ownership: most of her contributions came about because she saw something that needed to be done, that no one else was owning, and didn't rest until it was complete."</blockquote>
+                    <div class="source">— Taylor Francis (current CEO of Watershed), Stripe Atlas Lead</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"Joanna has tremendous independence. She is the only person on Atlas User Ops in Dublin, does most of her work when those of us in San Francisco are still asleep, and doesn't benefit from sitting with us in real life. In spite of that, she is able to initiate from scratch and fully implement comprehensive projects like the Cork vendor training."</blockquote>
+                    <div class="source">— Taylor Francis (current CEO of Watershed), Stripe Atlas Lead</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"I feel very confident in Joanna owning large projects. She's great at driving projects to completion while keeping all the different stakeholders engaged."</blockquote>
+                    <div class="source">— Peer feedback, Stripe</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"Getting things done — if she takes on an action she makes it happen."</blockquote>
+                    <div class="source">— Chloe Wood (teammate on Stripe Atlas)</div>
+                </div>
+                
+                <h3>On Quality and Impact</h3>
+                
+                <div class="quote-card">
+                    <blockquote>"It is impossible to overstate how important Joanna was to this project."</blockquote>
+                    <div class="source">— Patrick McKenzie (aka <a href="https://www.kalzumeus.com/" target="_blank" style="color: var(--grey-light);">patio11</a>), on the YC partnership</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"Joanna is very high impact and delivers some of the highest quality results of anyone I've worked with at Stripe. The best example here is the partner training which she led starting at Cork."</blockquote>
+                    <div class="source">— Chloe Wood (teammate on Stripe Atlas)</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"Joanna is a model contributor in this way. There is a great example nearly every day in Atlas-user-ops."</blockquote>
+                    <div class="source">— Taylor Francis (current CEO of Watershed), Stripe Atlas Lead</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"Your ability to develop deep functional expertise quickly is commendable."</blockquote>
+                    <div class="source">— Manager feedback, Q1 2020</div>
+                </div>
+                
+                <h3>On Influence and Changing Minds</h3>
+                
+                <div class="quote-card">
+                    <blockquote>"She shaped the team's attitude and philosophy towards partner teams. She convinced me to treat them as serious collaborators who were capable of stellar quality."</blockquote>
+                    <div class="source">— Chloe Wood (teammate on Stripe Atlas)</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"Without her advocating for giving more responsibility to partners and pushing back against my hesitations, we would have been slower to make the right choice here or never done it at all."</blockquote>
+                    <div class="source">— Chloe Wood (teammate on Stripe Atlas)</div>
+                </div>
+                
+                <h3>On Working With Others</h3>
+                
+                <div class="quote-card">
+                    <blockquote>"With very little direction, she has been running this workstream, working across multiple Stripe teams, and just all around getting things done in a timely manner. I'm really impressed with both Joanna's work output as well as her ethics and approach."</blockquote>
+                    <div class="source">— Kelly Moriarty (Stripe Tax Product Manager)</div>
+                </div>
+                
+                <div class="quote-card">
+                    <blockquote>"She's an effective and clear communicator."</blockquote>
+                    <div class="source">— Taylor Francis (current CEO of Watershed), Stripe Atlas Lead</div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-label">Patterns</div>
+                <h2>What Managers Consistently Said</h2>
+                
+                <h3>Strengths</h3>
+                <ul>
+                    <li>Critical thinking</li>
+                    <li>Getting things done / project management</li>
+                    <li>Company building and acting like an owner</li>
+                    <li>Working with others / stakeholder management</li>
+                    <li>User-first mindset</li>
+                    <li>Quietly impactful</li>
+                    <li>Incredible high bar for quality</li>
+                </ul>
+                
+                <h3>Growth Areas</h3>
+                <ul>
+                    <li>I care deeply about quality, which means I sometimes need to remind myself that done is better than perfect</li>
+                    <li>I can take on a lot without flagging it: working on being clearer about capacity</li>
+                    <li>Communicating my work more visibly: being louder when needed</li>
+                    <li>Not being afraid to take up more space or ask questions</li>
+                </ul>
+            </section>
+            
+        </div>
+
+        <!-- ==================== REFERENCES TAB ==================== -->
+        <div id="references" class="tab-content">
+            
+            <section>
+                <div class="section-label">People</div>
+                <h2>References</h2>
+                
+                <p style="margin-bottom: 32px;">People who can speak to my work. Contact details available on request.</p>
+                
+                <h3>Managers</h3>
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/nelda/" target="_blank" style="color: var(--dark);">Nelda Gabbay</a></td>
+                            <td>Manager</td>
+                            <td>Atlas, User Ops</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/daynahardie/" target="_blank" style="color: var(--dark);">Dayna Hardie</a></td>
+                            <td>Manager</td>
+                            <td>Stripe Atlas</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/paul-de-bromhead/" target="_blank" style="color: var(--dark);">Paul de Bromhead</a></td>
+                            <td>Manager</td>
+                            <td>Product Operations, EMEA Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/darrenbracken/" target="_blank" style="color: var(--dark);">Darren Bracken</a></td>
+                            <td>Manager</td>
+                            <td>User Operations, Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/iarla-o-carroll-29512a12/" target="_blank" style="color: var(--dark);">Iarla O'Carroll</a></td>
+                            <td>Manager</td>
+                            <td>User Operations, Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/xujunw/" target="_blank" style="color: var(--dark);">Jun Xu</a></td>
+                            <td>Manager</td>
+                            <td>TikTok</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Team Leads / Heads</h3>
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/taylor-francis-4ba49640/" target="_blank" style="color: var(--dark);">Taylor Francis</a> (current CEO of Watershed)</td>
+                            <td>Team Lead</td>
+                            <td>Stripe Atlas</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/blakesamic/" target="_blank" style="color: var(--dark);">Blake Samic</a> (current Head of Product Operations at OpenAI)</td>
+                            <td>Head of Product Operations</td>
+                            <td>Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/bobvanwinden/" target="_blank" style="color: var(--dark);">Bob van Winden</a></td>
+                            <td>Head of Operations</td>
+                            <td>Stripe</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Engineering</h3>
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/alexkehayias/" target="_blank" style="color: var(--dark);">Alex Kehayias</a></td>
+                            <td>Engineering Manager</td>
+                            <td>Stripe Atlas</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/andylouisqin/" target="_blank" style="color: var(--dark);">Andy Qin</a></td>
+                            <td>Engineer</td>
+                            <td>Stripe Atlas</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/aidanfoley7/" target="_blank" style="color: var(--dark);">Aidan Foley</a></td>
+                            <td>Engineering Lead</td>
+                            <td>Authentication, Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/cianodriscoll/" target="_blank" style="color: var(--dark);">Cian O'Driscoll</a></td>
+                            <td>Engineering Lead</td>
+                            <td>Stripe</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Cross-functional</h3>
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/patrickmckenzie/" target="_blank" style="color: var(--dark);">Patrick McKenzie</a> (aka <a href="https://www.kalzumeus.com/" target="_blank" style="color: var(--dark);">patio11</a>)</td>
+                            <td>Cross-functional</td>
+                            <td>YC partnership, Stripe Atlas</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/kmoriarty1/" target="_blank" style="color: var(--dark);">Kelly Moriarty</a></td>
+                            <td>Product Manager (Stripe Tax)</td>
+                            <td>User research, Franklin</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Teammates</h3>
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/chloewood/" target="_blank" style="color: var(--dark);">Chloe Wood</a></td>
+                            <td>Teammate</td>
+                            <td>Stripe Atlas Operations</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/jthattil/" target="_blank" style="color: var(--dark);">Joshua Thattil</a></td>
+                            <td>Teammate</td>
+                            <td>Product Operations, EMEA Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/urbainkwizera/" target="_blank" style="color: var(--dark);">Urbain Kwizera</a></td>
+                            <td>Teammate</td>
+                            <td>Tech Programs & Operations, Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/sam-mcallister/" target="_blank" style="color: var(--dark);">Sam McAllister</a></td>
+                            <td>Teammate</td>
+                            <td>Operations, Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/hannah-lloyd-03b07565/" target="_blank" style="color: var(--dark);">Hannah Lloyd</a></td>
+                            <td>Teammate</td>
+                            <td>Operations, Stripe</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/anitablanchfield/" target="_blank" style="color: var(--dark);">Anita Blanchfield</a></td>
+                            <td>Teammate</td>
+                            <td>Stripe Atlas</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/wanlin-guo-1910b0101/" target="_blank" style="color: var(--dark);">Wanlin Guo</a></td>
+                            <td>Teammate</td>
+                            <td>TikTok</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+        </div>
+
+        <footer>
+            <div class="footer-name">Joanna McCarthy Pedrina</div>
+            <div class="footer-contact"><a href="mailto:joannapedrina@gmail.com">joannapedrina@gmail.com</a></div>
+            <div class="footer-contact">+353 86 320 4973</div>
+            <div class="footer-updated">Last updated January 2025</div>
+        </footer>
+        
+    </div>
+    
+    <script>
+        // Tab switching functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.dataset.tab;
+                
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
